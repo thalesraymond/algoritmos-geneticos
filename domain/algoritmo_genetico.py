@@ -17,3 +17,16 @@ class AlgoritmoGenetico():
         
     def ordenar_populacao(self):
         self.populacao = sorted(self.populacao, key = lambda populacao: populacao.nota_avaliacao, reverse = True)
+        
+        
+    def obter_melhor_individuo(self, individuo : Individuo):
+        if individuo.nota_avaliacao > self.melhor_solucao.nota_avaliacao:
+            self.melhor_solucao = individuo
+            
+    
+    def somar_avaliacoes(self):
+        soma = 0
+        for individuo in self.populacao:
+            soma += individuo.nota_avaliacao
+        
+        return soma

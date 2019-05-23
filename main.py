@@ -43,10 +43,8 @@ if __name__ == '__main__':
     
     ag.ordenar_populacao()
     
-    for i in range(ag.tamanho_populacao):
-        print("*** Individuo %s ***\n" % i,
-              "Espaços = %s\n" % str(ag.populacao[i].espacos),
-              "Valoes = %s\n" % str(ag.populacao[i].valores),
-              "Cromossomo = %s" % str(ag.populacao[i].cromossomo),
-              "Nota  = %s" % ag.populacao[i].nota_avaliacao)
+    ag.obter_melhor_individuo(ag.populacao[0])
     
+    soma = ag.somar_avaliacoes()
+    
+    print("Soma das Avaliações: %s" % soma)
