@@ -47,12 +47,34 @@ if __name__ == '__main__':
     
     soma = ag.somar_avaliacoes()
     
+    print("Melhor solução: %s" % ag.melhor_solucao.cromossomo,
+      "Valor: %s\n" % ag.melhor_solucao.nota_avaliacao)
+    
+    nova_populacao = []
+    fator_mutacao = 0.01
+    
     for individuos_gerados in range(0, ag.tamanho_populacao, 2):
         pai1 = ag.selecionar_pai(soma)
         pai2 = ag.selecionar_pai(soma)
         
-        print(pai1)
-        print(pai2)
+        filhos = ag.populacao[pai1].crossover(ag.populacao[pai2])
+        
+        nova_populacao.append(filhos[0].mutacao(fator_mutacao))
+        nova_populacao.append(filhos[1].mutacao(fator_mutacao))
+                
+    ag.populacao = list(nova_populacao)
+    
+    for individuo in ag.populacao:
+        individuo.avaliacao()
+        
+    ag.ordenar_populacao()
+    
+    ag.obter_melhor_individuo(ag.populacao[0])
+    
+    soma = ag.somar_avaliacoes()
+    
+    print("Melhor solução: %s" % ag.melhor_solucao.cromossomo,
+          "Valor: %s\n" % ag.melhor_solucao.nota_avaliacao)
     
         
         

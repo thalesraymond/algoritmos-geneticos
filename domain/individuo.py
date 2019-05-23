@@ -49,13 +49,9 @@ class Individuo():
         return filhos
     
     def mutacao(self, taxa_mutacao):
-        print("Antes %s " % self.cromossomo)
-        
         for i in range(len(self.cromossomo)):
             if random() >= taxa_mutacao:
                 continue;
             self.cromossomo[i] = "0" if self.cromossomo[i] == "1" else "1"
-        
-        print ("Depois %s " % self.cromossomo)
-                
+                    
         return self
