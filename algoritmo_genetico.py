@@ -1,11 +1,9 @@
 from random import random
 from domain.produto import Produto
 from domain.individuo import Individuo
-        
-            
+
         
 if __name__ == '__main__':
-    #p1 = Produto("Iphone 6", 0.0000899, 2199.12)
     lista_produtos = []
     lista_produtos.append(Produto("Geladeira Dako", 0.751, 999.90))
     lista_produtos.append(Produto("Iphone 6", 0.0000899, 2911.12))
@@ -34,11 +32,7 @@ if __name__ == '__main__':
     limite = 3
     
     individuo1 = Individuo(espacos, valores, limite)
-    print("Espaços = %s" % str(individuo1.espacos))
-    print("Valores = %s" % str(individuo1.valores))
-    print("Cromossomo = %s" % str(individuo1.cromossomo))
-    
-    print("\nComponentes da carga")
+    print("\nIndividuo 1")
     for i in range(len(lista_produtos)):
         if individuo1.cromossomo[i] == '1':
             print("Nome: %s R$ %s " % (lista_produtos[i].nome, lista_produtos[i].valor))
@@ -47,5 +41,18 @@ if __name__ == '__main__':
     print("Nota = %s" % individuo1.nota_avaliacao)
     print("Espaço usado = %s" % individuo1.espaco_usado)
         
-        
+    individuo2 = Individuo(espacos, valores, limite)
+    print("\nIndividuo 2")
+    for i in range(len(lista_produtos)):
+        if individuo2.cromossomo[i] == '1':
+            print("Nome: %s R$ %s " % (lista_produtos[i].nome, lista_produtos[i].valor))
+            
+    individuo2.avaliacao()
+    print("Nota = %s" % individuo2.nota_avaliacao)
+    print("Espaço usado = %s" % individuo2.espaco_usado)
+    
+    filhos = individuo1.crossover(individuo2)
+    
+    individuo1.mutacao(0.05)
+    individuo2.mutacao(0.05)
     
