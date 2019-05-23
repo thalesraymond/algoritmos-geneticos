@@ -26,19 +26,27 @@ if __name__ == '__main__':
     espacos = []
     valores = []
     nomes = []
+    
     for produto in lista_produtos:
         espacos.append(produto.espaco)
         valores.append(produto.valor)
         nomes.append(produto.nome)
+        
     limite = 3
     
     tamanho_populacao = 20
     ag = AlgoritmoGenetico(tamanho_populacao)
     ag.inicializar_populacao(espacos,valores,limite)
     
+    for individuo in ag.populacao:
+        individuo.avaliacao()
+    
+    ag.ordenar_populacao()
+    
     for i in range(ag.tamanho_populacao):
         print("*** Individuo %s ***\n" % i,
               "Espaços = %s\n" % str(ag.populacao[i].espacos),
               "Valoes = %s\n" % str(ag.populacao[i].valores),
-              "Cromossomo = %s" % str(ag.populacao[i].cromossomo))
+              "Cromossomo = %s" % str(ag.populacao[i].cromossomo),
+              "Nota  = %s" % ag.populacao[i].nota_avaliacao)
     

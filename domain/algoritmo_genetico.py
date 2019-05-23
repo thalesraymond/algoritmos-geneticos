@@ -13,3 +13,7 @@ class AlgoritmoGenetico():
             self.populacao.append(Individuo(espacos,valores,limites_espacos))
         
         self.melhor_solucao = self.populacao[0]
+        
+        
+    def ordenar_populacao(self):
+        self.populacao = sorted(self.populacao, key = lambda populacao: populacao.nota_avaliacao, reverse = True)
