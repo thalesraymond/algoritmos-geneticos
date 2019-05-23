@@ -47,4 +47,17 @@ if __name__ == '__main__':
     
     soma = ag.somar_avaliacoes()
     
-    print("Soma das Avaliações: %s" % soma)
+    for individuos_gerados in range(0, ag.tamanho_populacao, 2):
+        pai1 = ag.selecionar_pai(soma)
+        pai2 = ag.selecionar_pai(soma)
+        
+        print(pai1)
+        print(pai2)
+    
+        
+        
+        
+        
+        
+        
+        

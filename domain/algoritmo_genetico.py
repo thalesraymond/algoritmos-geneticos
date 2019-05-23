@@ -1,4 +1,5 @@
 from domain.individuo import Individuo
+from random import random
 
 class AlgoritmoGenetico():
     def __init__(self, tamanho_populacao):
@@ -30,3 +31,17 @@ class AlgoritmoGenetico():
             soma += individuo.nota_avaliacao
         
         return soma
+    
+    
+    def selecionar_pai(self, soma_avaliacao):
+        pai = -1
+        valor_selecionado = random() * soma_avaliacao
+        soma = 0;
+        i = 0
+        
+        while i < len(self.populacao) and soma < valor_selecionado:
+            soma += self.populacao[i].nota_avaliacao
+            pai += 1
+            i += 1
+        
+        return pai;
