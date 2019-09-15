@@ -1,7 +1,6 @@
-from random import random
 from domain.produto import Produto
-from domain.individuo import Individuo
 from domain.algoritmo_genetico import AlgoritmoGenetico
+import matplotlib.pyplot as plt
 
         
 if __name__ == '__main__':
@@ -20,8 +19,6 @@ if __name__ == '__main__':
     lista_produtos.append(Produto("Geladeira Consul", 0.870, 1199.89))
     lista_produtos.append(Produto("Notebook Lenovo", 0.498, 1999.90))
     lista_produtos.append(Produto("Notebook Asus", 0.527, 3999.00))
-    #for produto in lista_produtos:
-    #    print(produto.nome)
     
     espacos = []
     valores = []
@@ -32,51 +29,25 @@ if __name__ == '__main__':
         valores.append(produto.valor)
         nomes.append(produto.nome)
         
-    limite = 3
-    
+    limite = 3    
     tamanho_populacao = 20
-    ag = AlgoritmoGenetico(tamanho_populacao)
-    ag.inicializar_populacao(espacos,valores,limite)
-    
-    for individuo in ag.populacao:
-        individuo.avaliacao()
-    
-    ag.ordenar_populacao()
-    
-    ag.obter_melhor_individuo(ag.populacao[0])
-    
-    soma = ag.somar_avaliacoes()
-    
-    print("Melhor solução: %s" % ag.melhor_solucao.cromossomo,
-      "Valor: %s\n" % ag.melhor_solucao.nota_avaliacao)
-    
-    nova_populacao = []
     fator_mutacao = 0.01
+    numero_geracoes = 100
     
-    for individuos_gerados in range(0, ag.tamanho_populacao, 2):
-        pai1 = ag.selecionar_pai(soma)
-        pai2 = ag.selecionar_pai(soma)
-        
-        filhos = ag.populacao[pai1].crossover(ag.populacao[pai2])
-        
-        nova_populacao.append(filhos[0].mutacao(fator_mutacao))
-        nova_populacao.append(filhos[1].mutacao(fator_mutacao))
-                
-    ag.populacao = list(nova_populacao)
+    ag = AlgoritmoGenetico(tamanho_populacao)
     
-    for individuo in ag.populacao:
-        individuo.avaliacao()
-        
-    ag.ordenar_populacao()
+    resultado = ag.resolver(fator_mutacao, numero_geracoes, espacos, valores, limite)
     
-    ag.obter_melhor_individuo(ag.populacao[0])
+    for i in range(len(lista_produtos)):
+        if resultado[i] == '1':
+            print("Nome: %s R$ %s "  % (lista_produtos[i].nome, lista_produtos[i].valor))
     
-    soma = ag.somar_avaliacoes()
-    
-    print("Melhor solução: %s" % ag.melhor_solucao.cromossomo,
-          "Valor: %s\n" % ag.melhor_solucao.nota_avaliacao)
-    
-        
+#    for valor in ag.lista_solucoes:
+#        print(valor)
+            
+    plt.plot(ag.lista_solucoes)
+    plt.title("Acompanhamento dos valores")
+    plt.show()
         
         
         
