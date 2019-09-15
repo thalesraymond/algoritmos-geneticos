@@ -1,6 +1,7 @@
 from domain.individuo import Individuo
 from random import random
 
+
 class AlgoritmoGenetico():
     def __init__(self, tamanho_populacao):
         self.tamanho_populacao = tamanho_populacao
